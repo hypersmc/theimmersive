@@ -1,0 +1,5 @@
+tile.optic_cable.name=Optic Cable
+tile.fluid_cable.name=fluid Cable
+item.voltmeter.name=Voltmeter
+tile.theimmersivetech.efurnace.name=Eletric Furnace
+itemGroup.TITBlocks=TIT Blocks

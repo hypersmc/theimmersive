@@ -1,0 +1,19 @@
+[
+{
+  "modid": "theimmersivetech",
+  "name": "TheImmersiveTech",
+  "description": "It's not only about the feature but of the past!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["HypersMC", "JumpWatch", "Shadowmaster435"],
+  "credits": "Thanks to Shadowmaster435 for helping with the development of this mod!",
+  "logoFile": "assets/tit/logo.png",
+  "screenshots": [],
+  "dependencies": [
+    "mod_MinecraftForge",
+    "redstoneflux"
+  ]
+}
+]
