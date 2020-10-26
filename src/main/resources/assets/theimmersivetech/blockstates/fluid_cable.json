@@ -1,7 +1,7 @@
 {
     "forge_marker": 1,
     "defaults": {
-        "model": "theimmersivetech:cable_centre",
+        "model": "theimmersivetech:cable_centre2",
         "textures": {
             "cable" : "theimmersivetech:fluid_texture"
         },
@@ -14,7 +14,7 @@
         "down": {
             "true": {
                 "submodel": {
-                    "cable_down": { "model": "theimmersivetech:cable_ends", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "x": 90 }
+                    "cable_down": { "model": "theimmersivetech:cable_ends2", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "x": 90 }
                }
             },
             "false": {
@@ -23,7 +23,7 @@
         "east": {
             "true": {
                 "submodel": {
-                    "cable_east": { "model": "theimmersivetech:cable_ends", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "y": 90 }
+                    "cable_east": { "model": "theimmersivetech:cable_ends2", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "y": 90 }
                }
             },
             "false": {
@@ -32,7 +32,7 @@
         "north": {
             "true": {
                 "submodel": {
-                    "cable_north": { "model": "theimmersivetech:cable_ends", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "y": 0 }
+                    "cable_north": { "model": "theimmersivetech:cable_ends22", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "y": 0 }
                }
             },
             "false": {
@@ -41,7 +41,7 @@
         "south": {
             "true": {
                 "submodel": {
-                    "cable_south": { "model": "theimmersivetech:cable_ends", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "y": 180 }
+                    "cable_south": { "model": "theimmersivetech:cable_ends2", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "y": 180 }
                }
             },
             "false": {
@@ -50,7 +50,7 @@
         "up": {
             "true": {
                 "submodel": {
-                    "cable_up": { "model": "theimmersivetech:cable_ends", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "x": 270 }
+                    "cable_up": { "model": "theimmersivetech:cable_ends2", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "x": 270 }
                }
             },
             "false": {
@@ -59,7 +59,7 @@
         "west": {
             "true": {
                 "submodel": {
-                    "cable_west": { "model": "theimmersivetech:cable_ends", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "y": 270 }
+                    "cable_west": { "model": "theimmersivetech:cable_ends2", "textures" : { "cableend" : "theimmersivetech:fluid_texture", "cablecap" : "theimmersivetech:fluid_texture" }, "y": 270 }
                }
             },
             "false": {
