@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "jumpwatcg+/cabletexture",
-		"particle": "jumpwatcg+/cabletexture"
+		"0": "theimmersivetech:cabletexture",
+		"particle": "theimmersivetech:cabletexture"
 	},
 	"elements": [
 		{
