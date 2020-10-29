@@ -1,9 +1,7 @@
 package JumpWatch.TheImmersiveTech;
 
-import JumpWatch.TheImmersiveTech.items.cabels.FluidCable;
-import JumpWatch.TheImmersiveTech.items.cabels.ItemFluidCable;
-import JumpWatch.TheImmersiveTech.items.cabels.ItemOpticCable;
-import JumpWatch.TheImmersiveTech.items.cabels.OpticCable;
+import JumpWatch.TheImmersiveTech.items.cabels.*;
+import JumpWatch.TheImmersiveTech.items.oreitems.CopperIngot;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -24,8 +22,16 @@ public class TheImmersiveTech {
 
     public static CreativeTabs TITBlocks = new CreativeTabs("TITBlocks") {
         @Override
-        public ItemStack getTabIconItem() { return new ItemStack(BlockReg.furnaceBlock); } };
-
+        public ItemStack getTabIconItem() {
+            return new ItemStack(BlockReg.furnaceBlock);
+        }
+    };
+    public static CreativeTabs TITITems = new CreativeTabs("TITItems") {
+        @Override
+        public ItemStack getTabIconItem() {
+            return new ItemStack(ItemReg.copperingot);
+        }
+    };
     static Block optic_cable = new OpticCable(Material.CLOTH)
             .setCreativeTab(CreativeTabs.BUILDING_BLOCKS)
             .setUnlocalizedName("optic_cable")
@@ -42,6 +48,17 @@ public class TheImmersiveTech {
     static Item ifluid_cable = new ItemFluidCable(fluid_cable)
             .setRegistryName("fluid_cable")
             .setUnlocalizedName("fluid_cable");
+
+    static Block item_cable = new ItemCable(Material.CLOTH)
+            .setCreativeTab(CreativeTabs.BUILDING_BLOCKS)
+            .setUnlocalizedName("item_cable")
+            .setRegistryName("item_cable");
+    static Item iitem_cable = new ItemItemCable(item_cable)
+            .setRegistryName("item_cable")
+            .setUnlocalizedName("item_cable");
+    static Item iCopper = new CopperIngot()
+            .setUnlocalizedName("copperingot");
+
     /*static Item voltmeter = new ItemVoltmeter()
     *        .setRegistryName("voltmeter")
     *        .setUnlocalizedName("voltmeter")
