@@ -3,5 +3,7 @@
   "os": [
     "linux"
   ],
-  "dist": "xenial"
+  "dist": "xenial",
+  before_install:
+ - chmod +x gradlew
 }
