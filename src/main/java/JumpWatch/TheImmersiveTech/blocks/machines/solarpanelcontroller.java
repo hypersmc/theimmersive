@@ -2,6 +2,8 @@ package JumpWatch.TheImmersiveTech.blocks.machines;
 
 import JumpWatch.TheImmersiveTech.TheImmersiveTech;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -12,17 +14,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class solarpanelcontroller extends Block {
 
-    public static final ResourceLocation solarpanelcontroller = new ResourceLocation(TheImmersiveTech.MODID, "solarpanelcontroller");
-    public solarpanelcontroller() {
-        super(Material.IRON);
-        setRegistryName(solarpanelcontroller);
-        setUnlocalizedName(TheImmersiveTech.MODID + ".solarpanelcontroller");
-        setHarvestLevel("pickaxe", 1);
-        setCreativeTab(TheImmersiveTech.TITBlocks);
-
-    }
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public solarpanelcontroller(Material materialIn) {
+        super(Material.LEAVES);
+        this.setSoundType(SoundType.METAL);
+        this.fullBlock = true;
+        this.setLightOpacity(0);
+        this.setHardness(0.2f);
+        this.setHarvestLevel("shears", 0);
     }
 }

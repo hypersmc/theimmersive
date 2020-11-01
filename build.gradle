@@ -34,8 +34,8 @@ minecraft {
 }
 
 dependencies {
-    provided files("run/mods/HyperCore-1.8.jar")
-    provided files("run/mods/RedstoneFlux-1.12-2.1.0.6-universal.jar")
+    provided files("extra/HyperCore-1.8.jar")
+    provided files("extra/RedstoneFlux-1.12-2.1.0.6-universal.jar")
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"

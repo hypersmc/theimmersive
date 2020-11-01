@@ -10,13 +10,13 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class solarpanel extends Block {
+public class solarpanelblock extends Block {
 
-    public static final ResourceLocation solarpanel = new ResourceLocation(TheImmersiveTech.MODID, "solarpanel");
-    public solarpanel() {
+    public static final ResourceLocation SPanel = new ResourceLocation(TheImmersiveTech.MODID, "solarpanelblock");
+    public solarpanelblock() {
         super(Material.IRON);
-        setRegistryName(solarpanel);
-        setUnlocalizedName(TheImmersiveTech.MODID + ".solarpanel");
+        setRegistryName(SPanel);
+        setUnlocalizedName(TheImmersiveTech.MODID + ".solarpanelblock");
         setHarvestLevel("pickaxe", 1);
         setCreativeTab(TheImmersiveTech.TITBlocks);
 

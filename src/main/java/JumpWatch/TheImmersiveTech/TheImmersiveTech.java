@@ -1,7 +1,8 @@
 package JumpWatch.TheImmersiveTech;
 
+import JumpWatch.TheImmersiveTech.items.SolarPanelController;
 import JumpWatch.TheImmersiveTech.items.cabels.*;
-import JumpWatch.TheImmersiveTech.items.oreitems.CopperIngot;
+import JumpWatch.TheImmersiveTech.items.itemsolarpanelcontroller;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,19 +20,19 @@ public class TheImmersiveTech {
     public static final String MODID = "theimmersivetech";
     public static final String NAME = "TheImmersiveTech";
     public static final String VERSION = "1.0";
-
     public static CreativeTabs TITBlocks = new CreativeTabs("TITBlocks") {
         @Override
         public ItemStack getTabIconItem() {
-            return new ItemStack(BlockReg.furnaceBlock);
+            return new ItemStack(Solar_PanelC);
         }
     };
-    public static CreativeTabs TITITems = new CreativeTabs("TITItems") {
+    /*public static CreativeTabs TITITems = new CreativeTabs("TITItems") {
         @Override
         public ItemStack getTabIconItem() {
             return new ItemStack(ItemReg.copperingot);
         }
-    };
+    };*/
+
     static Block optic_cable = new OpticCable(Material.CLOTH)
             .setCreativeTab(CreativeTabs.BUILDING_BLOCKS)
             .setUnlocalizedName("optic_cable")
@@ -39,6 +40,13 @@ public class TheImmersiveTech {
     static Item ioptic_cable = new ItemOpticCable(optic_cable)
             .setRegistryName("optic_cable")
             .setUnlocalizedName("optic_cable");
+
+    public static Block Solar_PanelC = new SolarPanelController(Material.IRON)
+            .setUnlocalizedName("solarpanelcontroller")
+            .setRegistryName("solarpanelcontroller");
+    public static Item ISolar_PanelC = new itemsolarpanelcontroller(Solar_PanelC)
+            .setRegistryName("solarpanelcontroller")
+            .setUnlocalizedName("solarpanelcontroller");
 
 
     static Block fluid_cable = new FluidCable(Material.CLOTH)
@@ -56,7 +64,7 @@ public class TheImmersiveTech {
     static Item iitem_cable = new ItemItemCable(item_cable)
             .setRegistryName("item_cable")
             .setUnlocalizedName("item_cable");
-    static Item iCopper = new CopperIngot()
+    /*static Item iCopper = new CopperIngot()
             .setUnlocalizedName("copperingot");
 
     /*static Item voltmeter = new ItemVoltmeter()

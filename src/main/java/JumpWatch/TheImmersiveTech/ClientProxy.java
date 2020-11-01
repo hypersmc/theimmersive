@@ -1,6 +1,5 @@
 package JumpWatch.TheImmersiveTech;
 
-import JumpWatch.TheImmersiveTech.blocks.furnace.FurnaceBlock;
 import JumpWatch.hypercore.utils.helplogger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -31,12 +30,13 @@ public class ClientProxy extends CommonProxy {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(TheImmersiveTech.optic_cable), 0, new ModelResourceLocation(TheImmersiveTech.MODID + ":optic_cable", "inventory"));
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(TheImmersiveTech.fluid_cable), 0, new ModelResourceLocation(TheImmersiveTech.MODID + ":fluid_cable", "inventory"));
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(TheImmersiveTech.item_cable), 0, new ModelResourceLocation(TheImmersiveTech.MODID + ":item_cable", "inventory"));
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(TheImmersiveTech.Solar_PanelC), 0, new ModelResourceLocation(TheImmersiveTech.MODID + ":solarpanelcontroller", "inventory"));
         //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(TheImmersiveTech.voltmeter, 0, new ModelResourceLocation(TheImmersiveTech.MODID + ":voltmeter", "inventory"));
     }
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         BlockReg.initModels();
-        ItemReg.initModels();
+        //ItemReg.initModels();
     }
     @Override
     public void postinit(FMLPostInitializationEvent event) {

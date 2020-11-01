@@ -1,7 +1,9 @@
 package JumpWatch.TheImmersiveTech.Tile;
 
 import JumpWatch.TheImmersiveTech.BlockReg;
-import JumpWatch.hypercore.ModSettings;
+import JumpWatch.TheImmersiveTech.TheImmersiveTech;
+import JumpWatch.TheImmersiveTech.utils.ModSettings;
+import JumpWatch.hypercore.utils.helplogger;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -19,13 +21,14 @@ import java.util.List;
 public class SolarControllerTileEntity extends TileEntity implements ITickable, IEnergyStorage {
     private List<Block> structureBlocks = new ArrayList<Block>();
     public int energy = 0;
-    public int capacity /*= ModSettings.solarProperties.EnergyCapacity*/;
+    public int capacity = ModSettings.solarProperties.EnergyCapacity;
     public int maxReceive = 0;
     private boolean alreadyUpdated = false;
     private boolean canProducePower;
-    public int rfPerTick /*= ModSettings.solarProperties.RFpertick*/;
-    public int maxExtract /*= ModSettings.solarProperties.transferRate*/;
+    public int rfPerTick = ModSettings.solarProperties.RFpertick;
+    public int maxExtract = ModSettings.solarProperties.transferRate;
     public int energyReceived = Math.min(capacity - energy, Math.min(this.rfPerTick, 31));
+    public static final Capability<IEnergyStorage> ENERGY_HANDLER = null;
     private int tempPower = 0;
     private int currentPower = 0;
     private boolean solarBuilt = false;
@@ -34,20 +37,23 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
     private int xEnd = 0;
     private int zEnd = 0;
     private int solarBlockCount = 0;
-
+    private int controlTicks = 0;
 
     public SolarControllerTileEntity(){
-        structureBlocks.add(BlockReg.solarpanelcontroller);
-        structureBlocks.add(BlockReg.solarpanel);
+        structureBlocks.add(TheImmersiveTech.Solar_PanelC);
+        structureBlocks.add(BlockReg.Solarpanel);
     }
 
 
     @Override
     public void update() {
         int number = solarBlockCount * rfPerTick;
-        if (!this.world.isRemote) {
+        ++controlTicks;
+        if (controlTicks >= 10000)
+            controlTicks = 0;
+        if (!this.world.isRemote && controlTicks % 20 == 0) {
+            solarBuilt = checkStructure();
             if (world.getTotalWorldTime() % 20 == 0) {
-                solarBuilt = checkStructure();
                 if (!alreadyUpdated)
                     alreadyUpdated = true;
                 if (canProducePower = (world.canBlockSeeSky(pos.up()) && world.isDaytime()) && ((!world.isRaining() && !world.isThundering()) || !world.getBiome(pos).canRain()))
@@ -59,7 +65,11 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
                 if (canProducePower) {
                     if (this.energy > capacity) {
                         this.energy = capacity;
-                    } else if (number > 0){
+                    } else if (solarBlockCount == 0) {
+                        helplogger.info("this worked1");
+                        energy += energyReceived;
+                    }else if (solarBlockCount > 0){
+                        helplogger.info("this worked2");
                         number += energyReceived;
                     }
                 }
@@ -154,14 +164,14 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
             {
                 pos = new BlockPos(x, this.getPos().getY(), z);
                 b = this.world.getBlockState(pos).getBlock();
-                if (b == BlockReg.solarpanelcontroller)
+                if (b == TheImmersiveTech.Solar_PanelC)
                     hasController = true;
                 if (x == xStart || x == xEnd || z == zStart || z == zEnd){
                     if (!structureBlocks.contains(b)){
                         isSolar = false;
                         break;
                     }else {
-                        if (b == BlockReg.solarpanel)
+                        if (b == BlockReg.Solarpanel)
                             ++solarBlockCount;
                     }
                 }
@@ -175,17 +185,28 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
     public int getCurrentPower() {
         return energyReceived;
     }
+
     @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-        if (capability == CapabilityEnergy.ENERGY) {
+    public int extractEnergy(int extract, boolean simulate) {
+        int amount = (extract <= this.energy) ? extract : this.energy;
+        this.energy -= amount;
+        if (this.energy < 0)
+            this.energy = 0;
+        return amount;
+    }
+
+    @Override
+    public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, net.minecraft.util.EnumFacing facing) {
+        if (capability != null && capability.getName() == "net.minecraftforge.energy.IEnergyStorage") {
             return true;
         }
         return super.hasCapability(capability, facing);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-        if (capability == CapabilityEnergy.ENERGY) {
+    public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing) {
+        if (capability != null && capability.getName() == "net.minecraftforge.energy.IEnergyStorage") {
             return (T) this;
         }
         return super.getCapability(capability, facing);
@@ -204,19 +225,6 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
         tag.setInteger("EnergyStored", this.energy);
         return tag;
     }
-    @Override
-    public int receiveEnergy(int i, boolean b) {
-        return 0;
-    }
-
-    @Override
-    public int extractEnergy(int extract, boolean simulate) {
-        int amount = (extract <= this.energy) ? extract : this.energy;
-        this.energy -= amount;
-        if (this.energy < 0)
-            this.energy = 0;
-        return amount;
-    }
 
     @Override
     public int getEnergyStored() {
@@ -229,6 +237,11 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
     }
 
     @Override
+    public int receiveEnergy(int receive, boolean sumulate) {
+        return 0;
+    }
+
+    @Override
     public boolean canExtract() {
         return true;
     }
@@ -237,6 +250,4 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
     public boolean canReceive() {
         return false;
     }
-
-
 }
