@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hypersmc/theimmersive.svg?branch=master)](https://travis-ci.org/hypersmc/theimmersive)
+
 -------------------------------------------
 Source installation information for modders
 -------------------------------------------
