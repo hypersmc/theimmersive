@@ -30,4 +30,5 @@ public class SolarPanelController extends solarpanelcontroller implements ITileE
         SolarControllerTileEntity tileEntity = (SolarControllerTileEntity) world.getTileEntity(pos);
         super.onBlockPlacedBy(world, pos, state, placer, stack);
     }
+
 }
