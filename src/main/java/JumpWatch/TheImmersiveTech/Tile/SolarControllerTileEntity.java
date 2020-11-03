@@ -54,10 +54,10 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
 
         if (!this.world.isRemote) {
             if (world.getTotalWorldTime() % 20 == 0) {
+                solarBuilt = checkStructure();
                 if (!alreadyUpdated)
                     solarBuilt = checkStructure();
                     alreadyUpdated = true;
-                solarBuilt = checkStructure();
                 if (canProducePower = (world.canBlockSeeSky(pos.up()) && world.isDaytime()) && ((!world.isRaining() && !world.isThundering()) || !world.getBiome(pos).canRain()))
                     ;
                 else
@@ -101,8 +101,8 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
         int z1 = pos.getZ();
         int x2 = 0;
         int z2 = 0;
-        int x3 = pos.getX();
-        int z3 = pos.getZ();
+        int x3 = 0;
+        int z3 = 0;
         int x4 = 0;
         int z4 = 0;
         while (checking)
@@ -153,14 +153,14 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
                 checking = false;
             }
         }
-        xStart = Math.max(Math.min(x1, x2), Math.min(x3, x4));
-        xEnd = Math.max(Math.min(x1, x2), Math.max(x3, x4));
+        xStart = Math.min(x3, x4);
+        xEnd = Math.max(x1, x2);
 
-        zStart = Math.max(Math.min(z1, z2), Math.min(z3, z4));
-        zEnd = Math.max(Math.min(z1, z2), Math.max(z3, z4));
+        zStart = Math.min(Math.min(z1, z2), Math.min(z3, z4));
+        zEnd = Math.max(z4, z2);
 
         solarBlockCount = 0;
-
+        solar_check:
         for (int x = xStart; x <= xEnd; ++x){
             for (int z = zStart; z <= zEnd; z++)
             {
@@ -177,7 +177,7 @@ public class SolarControllerTileEntity extends TileEntity implements ITickable, 
                     if (!structureBlocks.contains(b)){
                         helplogger.info("No controller or panels found!");
                         isSolar = false;
-                        break;
+                        break solar_check;
                     }else {
                         if (b == BlockReg.Solarpanel)
                             world.setBlockState(block, state0);

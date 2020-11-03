@@ -1,0 +1,15 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "theimmersivetech:efurnace",
+        "textures": {
+            "cable" : "theimmersivetech:solarpaneltexture"
+        },
+        "uvlock": false
+    },
+    "variants": {
+        "normal": [{
+            "model": "theimmersivetech:efurnace"
+        }]
+    }
+}
