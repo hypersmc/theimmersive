@@ -34,7 +34,7 @@ public class TheImmersiveTech {
     };*/
 
     static Block optic_cable = new OpticCable(Material.CLOTH)
-            .setCreativeTab(CreativeTabs.BUILDING_BLOCKS)
+            .setCreativeTab(TheImmersiveTech.TITBlocks)
             .setUnlocalizedName("optic_cable")
             .setRegistryName("optic_cable");
     static Item ioptic_cable = new ItemOpticCable(optic_cable)
@@ -50,7 +50,7 @@ public class TheImmersiveTech {
 
 
     static Block fluid_cable = new FluidCable(Material.CLOTH)
-            .setCreativeTab(CreativeTabs.BUILDING_BLOCKS)
+            .setCreativeTab(TheImmersiveTech.TITBlocks)
             .setUnlocalizedName("fluid_cable")
             .setRegistryName("fluid_cable");
     static Item ifluid_cable = new ItemFluidCable(fluid_cable)
@@ -58,7 +58,7 @@ public class TheImmersiveTech {
             .setUnlocalizedName("fluid_cable");
 
     static Block item_cable = new ItemCable(Material.CLOTH)
-            .setCreativeTab(CreativeTabs.BUILDING_BLOCKS)
+            .setCreativeTab(TheImmersiveTech.TITBlocks)
             .setUnlocalizedName("item_cable")
             .setRegistryName("item_cable");
     static Item iitem_cable = new ItemItemCable(item_cable)

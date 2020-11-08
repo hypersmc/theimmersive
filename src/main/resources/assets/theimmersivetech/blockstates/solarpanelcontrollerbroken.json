@@ -1,0 +1,15 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "theimmersivetech:solarpanelcontrollerbroken",
+        "textures": {
+            "cable" : "theimmersivetech:solarpaneltexturebroken"
+        },
+        "uvlock": false
+    },
+    "variants": {
+        "normal": [{
+            "model": "theimmersivetech:solarpanelcontrollerbroken"
+        }]
+    }
+}
