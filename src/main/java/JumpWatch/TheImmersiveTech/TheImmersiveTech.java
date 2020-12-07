@@ -20,6 +20,7 @@ public class TheImmersiveTech {
     public static final String MODID = "theimmersivetech";
     public static final String NAME = "theimmersivetech";
     public static final String VERSION = "1.0";
+    public static TheImmersiveTech instance;
     public static CreativeTabs TITBlocks = new CreativeTabs("TITBlocks") {
         @Override
         public ItemStack getTabIconItem() {

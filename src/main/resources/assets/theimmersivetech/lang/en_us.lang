@@ -9,3 +9,5 @@ tile.theimmersivetech.solarpanelcontrollerbrokenblock.name=Solar Panel Controlle
 tile.solarpanelcontroller.name=Solar panel Controller
 itemGroup.TITBlocks=TIT Blocks
 itemGroup.TITITems=TIT Items
+container.electric_crusher=test
+container.electric_furnace=test2

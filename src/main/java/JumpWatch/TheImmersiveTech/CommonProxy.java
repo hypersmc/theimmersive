@@ -5,6 +5,7 @@ import JumpWatch.TheImmersiveTech.blocks.furnace.FurnaceBlock;
 import JumpWatch.TheImmersiveTech.blocks.machines.solarpanelblock;
 import JumpWatch.TheImmersiveTech.blocks.machines.solarpanelbrokenblock;
 import JumpWatch.TheImmersiveTech.blocks.machines.solarpanelcontrollerbrokenblock;
+import JumpWatch.TheImmersiveTech.utils.GuiHandler;
 import JumpWatch.TheImmersiveTech.world.Gen.Village.Building1;
 import JumpWatch.TheImmersiveTech.world.Gen.Village.handler.Building1Handler;
 import JumpWatch.hypercore.cabels.tileentities.CableTileEntity;
@@ -22,11 +23,13 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
+
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
@@ -71,6 +74,7 @@ public class CommonProxy {
         //event.getRegistry().registerAll(TheImmersiveTech.iCopper);
     }
     public void init(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(TheImmersiveTech.instance, new GuiHandler());
 
     }
 
