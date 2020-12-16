@@ -66,7 +66,7 @@ public class ContainerElectricCrusher extends Container {
                 slot.onSlotChange(itemstack1, itemstack);
             } else if (!this.mergeItemStack(itemstack1, 0, 2, false)) {
                 if (index < 2 + 27) {
-                    if (!this.mergeItemStack(itemstack1, 2 + 27, this.inventorySlots.size(), true)) {
+                    if (!this.mergeItemStack(itemstack1, 2 + 27, this.inventorySlots.size(), false)) {
                         return ItemStack.EMPTY;
                     }
                 } else {

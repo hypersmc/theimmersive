@@ -4,6 +4,7 @@ package JumpWatch.TheImmersiveTech.blocks.machines;
 import JumpWatch.TheImmersiveTech.TheImmersiveTech;
 import JumpWatch.TheImmersiveTech.Tile.TileEntityElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.BlockBase;
+import JumpWatch.hypercore.utils.helplogger;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumHand;
@@ -24,7 +25,7 @@ import java.util.List;
 public class BlockElectricCrusher extends BlockBase implements ITileEntityProvider {
     public final static String INTERNAL_NAME = "electric_crusher";
     public BlockElectricCrusher() {
-        super(Material.IRON, INTERNAL_NAME, TheImmersiveTech.TITBlocks);
+        super(Material.IRON, INTERNAL_NAME);
         setUnlocalizedName(INTERNAL_NAME);
     }
 
@@ -43,7 +44,7 @@ public class BlockElectricCrusher extends BlockBase implements ITileEntityProvid
         if (!worldIn.isRemote) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof TileEntityElectricCrusher) {
-                playerIn.openGui(TheImmersiveTech.instance, 5, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                playerIn.openGui(TheImmersiveTech.MODID, 5, worldIn, pos.getX(), pos.getY(), pos.getZ());
             }
         }
         return true;

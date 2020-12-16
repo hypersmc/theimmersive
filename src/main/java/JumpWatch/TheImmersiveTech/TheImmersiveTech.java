@@ -1,8 +1,11 @@
 package JumpWatch.TheImmersiveTech;
 
+import JumpWatch.TheImmersiveTech.blocks.recipes.CrusherRecipes;
 import JumpWatch.TheImmersiveTech.items.SolarPanelController;
 import JumpWatch.TheImmersiveTech.items.cabels.*;
 import JumpWatch.TheImmersiveTech.items.itemsolarpanelcontroller;
+import JumpWatch.TheImmersiveTech.utils.GuiHandler;
+import JumpWatch.hypercore.utils.helplogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,6 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = TheImmersiveTech.MODID, name = TheImmersiveTech.NAME, version = TheImmersiveTech.VERSION, dependencies = "required-after:hypercore;")
 public class TheImmersiveTech {
@@ -76,12 +80,17 @@ public class TheImmersiveTech {
     */
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
+        CrusherRecipes.CrusherRecipes();
         proxy.preinit(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        helplogger.info("This worked9!");
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+        helplogger.info("This worked10!");
         proxy.init(event);
+
     }
 
 }

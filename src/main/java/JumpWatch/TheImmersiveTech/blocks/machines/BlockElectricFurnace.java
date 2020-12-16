@@ -23,10 +23,9 @@ import java.util.List;
 public class BlockElectricFurnace extends BlockBase implements ITileEntityProvider {
     public final static String INTERNAL_NAME = "electric_furnace";
     public BlockElectricFurnace() {
-        super(Material.IRON, INTERNAL_NAME, TheImmersiveTech.TITBlocks);
+        super(Material.IRON, INTERNAL_NAME);
         setUnlocalizedName(INTERNAL_NAME);
     }
-
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntitiyEletricFurnace();
@@ -41,7 +40,7 @@ public class BlockElectricFurnace extends BlockBase implements ITileEntityProvid
         if (!worldIn.isRemote) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof TileEntitiyEletricFurnace) {
-                playerIn.openGui(TheImmersiveTech.instance, 4, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                playerIn.openGui(TheImmersiveTech.MODID, 4, worldIn, pos.getX(), pos.getY(), pos.getZ());
             }
         }
         return true;

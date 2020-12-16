@@ -28,7 +28,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 @Mod.EventBusSubscriber
-public class CommonProxy {
+public class CommonProxy{
 
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
@@ -74,8 +74,7 @@ public class CommonProxy {
         //event.getRegistry().registerAll(TheImmersiveTech.iCopper);
     }
     public void init(FMLInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(TheImmersiveTech.instance, new GuiHandler());
-
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     public void postinit(FMLPostInitializationEvent event) {

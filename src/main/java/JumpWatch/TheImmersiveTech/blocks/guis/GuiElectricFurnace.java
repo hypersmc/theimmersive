@@ -3,10 +3,10 @@ package JumpWatch.TheImmersiveTech.blocks.guis;
 import JumpWatch.TheImmersiveTech.TheImmersiveTech;
 import JumpWatch.TheImmersiveTech.Tile.TileEntitiyEletricFurnace;
 import JumpWatch.TheImmersiveTech.blocks.Containers.ContainerElectricFurnace;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiElectricFurnace extends GuiContainer {
     private static final ResourceLocation TEXTURES = new ResourceLocation(TheImmersiveTech.MODID + ":textures/gui/electric_furnace.png");
@@ -22,7 +22,6 @@ public class GuiElectricFurnace extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String tileName = this.tileentity.getDisplayName().getUnformattedText();
         this.fontRenderer.drawString(tileName, (this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) - 5, 6, 4210752);
-        this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 7, this.ySize - 96 + 2, 4210752);
         this.fontRenderer.drawString(Integer.toString(this.tileentity.getEnergyStored()), 115, 72, 4210752);
     }
 
@@ -47,4 +46,7 @@ public class GuiElectricFurnace extends GuiContainer {
         int j = this.tileentity.getMaxEnergyStored();
         return i != 0 && j != 0 ? i * pixels / j : 0;
     }
+
+
+
 }

@@ -5,10 +5,12 @@ import JumpWatch.TheImmersiveTech.Tile.TileEntityElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.furnace.FurnaceBlock;
 import JumpWatch.TheImmersiveTech.blocks.machines.*;
 import JumpWatch.TheImmersiveTech.utils.GuiHandler;
+import JumpWatch.hypercore.utils.helplogger;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -42,29 +44,24 @@ public class BlockReg {
     @GameRegistry.ObjectHolder(BlockElectricFurnace.INTERNAL_NAME)
     private static BlockElectricFurnace blockElectricFurnace;
 
-    //regs
-    @SubscribeEvent
-    public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(new BlockElectricFurnace());
-        event.getRegistry().register(new BlockElectricCrusher());
 
-    }
 
-    public void preInit(FMLPreInitializationEvent event) {
-        GameRegistry.registerTileEntity(TileEntitiyEletricFurnace.class, new ResourceLocation(TheImmersiveTech.MODID, "electric_furnace"));
-        GameRegistry.registerTileEntity(TileEntityElectricCrusher.class, new ResourceLocation(TheImmersiveTech.MODID, "electric_crusher"));
-    }
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
+        helplogger.info("this worked11");
         event.getRegistry().register(blockElectricFurnace.createItemBlock());
         event.getRegistry().register(blockElectricCrusher.createItemBlock());
     }
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onRegisterModels(ModelRegistryEvent event) {
+        helplogger.info("this worked12");
         blockElectricFurnace.registerItemModel(Item.getItemFromBlock(blockElectricFurnace));
         blockElectricCrusher.registerItemModel(Item.getItemFromBlock(blockElectricCrusher));
 
+    }
+    public void init(FMLInitializationEvent event){
+        helplogger.info("This worked9!");
     }
 
 

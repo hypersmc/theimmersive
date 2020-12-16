@@ -4,56 +4,69 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.init.Items;
 import net.minecraft.init.Blocks;
 
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Map;
 
 import com.google.common.collect.Table;
 import com.google.common.collect.Maps;
 import com.google.common.collect.HashBasedTable;
 
 public class CrusherRecipes {
-    private static final CrusherRecipes INSTANCE = new CrusherRecipes();
-    private final Table<ItemStack, ItemStack, ItemStack> smeltingList = HashBasedTable.<ItemStack, ItemStack, ItemStack>create();
-    private final Map<ItemStack, Float> experienceList = Maps.<ItemStack, Float>newHashMap();
-    public static CrusherRecipes getInstance() {
-        return INSTANCE;
-    }
+    //private static final CrusherRecipes INSTANCE = new CrusherRecipes();
+    private static final List<CrusherRecipe> recipes = new ArrayList<>();
 
-    private CrusherRecipes() {
-        // nothing-here-to-see-:)
-        // addEletricRecipe(new ItemStack(Items.IRON_INGOT), new ItemStack(Items.COAL),
-        // new ItemStack(ItemBronzeIngot.block), 0.0F);
-        // addEletricRecipe(new ItemStack(Items.DIAMOND), new
-        // ItemStack(Items.GOLD_INGOT), new ItemStack(ItemBronzeIngot.block), 0.0F);
-        // addEletricRecipe(new ItemStack(), new ItemStack(Blocks.IRON_ORE), new
-        // ItemStack(Items.IRON_INGOT), 0.0F);
-        addEletricRecipe(new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT), 0.0F);
-    }
 
-    public void addEletricRecipe(ItemStack input1, ItemStack result, float experience) {
-        if (getEletricResult(input1) != ItemStack.EMPTY)
-            return;
-        this.smeltingList.put(input1, input1, result);
-        this.experienceList.put(result, Float.valueOf(experience));
-    }
+    public static void CrusherRecipes(){
+        recipes.add(new CrusherRecipe(new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT), 0.0F));
 
-    public ItemStack getEletricResult(ItemStack input1) {
-        for (Entry<ItemStack, Map<ItemStack, ItemStack>> entry : this.smeltingList.columnMap().entrySet()) {
-            for (Entry<ItemStack, ItemStack> ent : entry.getValue().entrySet()) {
-                return ((ItemStack) ent.getValue()).copy();
+    }
+    public static CrusherRecipe findRecipe(ItemStack input) {
+        if (input.isEmpty()) return null;
+
+        for (CrusherRecipe recipe : recipes) {
+            if (ItemStack.areItemStacksEqual(recipe.input, recipe.input)) {
+                return recipe;
             }
         }
-        return ItemStack.EMPTY;
+        return null;
+    }
+    /*public static CrusherRecipes getInstance(){
+        return INSTANCE;
+    }*/
+    private CrusherRecipes(){
+        recipes.add(new CrusherRecipe(new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT), 0.0F));
     }
 
-    private boolean compareItemStacks(ItemStack stack1) {
-        return (stack1.getMetadata() == 32767);
+    public void addRecipe(ItemStack input, ItemStack output, float experience){
+        if (input.isEmpty()) return;
+        if (output.isEmpty()) return;
+        if (experience < 0.0F) return;
+        recipes.add(new CrusherRecipe(input, output, experience));
     }
 
-    public float getEletrickExperience(ItemStack stack) {
-        for (Entry<ItemStack, Float> entry : this.experienceList.entrySet()) {
-            return ((Float) entry.getValue()).floatValue();
+
+    public static class CrusherRecipe {
+        private final ItemStack input;
+        private final ItemStack output;
+        private final float experience;
+
+        public CrusherRecipe(ItemStack input, ItemStack output, float experience) {
+            this.input = input;
+            this.output = output;
+            this.experience = experience;
         }
-        return 0.0F;
+
+        public ItemStack getInput() {
+            return input.copy();
+        }
+
+        public ItemStack getOutput() {
+            return output.copy();
+        }
+
+        public float getExperience() {
+
+            return experience;
+        }
     }
 }
