@@ -1,48 +1,43 @@
 package JumpWatch.TheImmersiveTech.blocks.recipes;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.init.Items;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
-import java.util.*;
-import java.util.Map.Entry;
-
-import com.google.common.collect.Table;
-import com.google.common.collect.Maps;
-import com.google.common.collect.HashBasedTable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CrusherRecipes {
-    //private static final CrusherRecipes INSTANCE = new CrusherRecipes();
     private static final List<CrusherRecipe> recipes = new ArrayList<>();
 
 
     public static void CrusherRecipes(){
         recipes.add(new CrusherRecipe(new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT), 0.0F));
-
+        recipes.add(new CrusherRecipe(new ItemStack(Blocks.GOLD_ORE), new ItemStack(Items.GOLD_INGOT), 0.0f));
     }
     public static CrusherRecipe findRecipe(ItemStack input) {
         if (input.isEmpty()) return null;
 
         for (CrusherRecipe recipe : recipes) {
-            if (ItemStack.areItemStacksEqual(recipe.input, recipe.input)) {
+            if (stackEqualExact(recipe.input, input)) {
                 return recipe;
             }
         }
         return null;
     }
-    /*public static CrusherRecipes getInstance(){
-        return INSTANCE;
-    }*/
+
+    /**
+     * Checks item, NBT, and meta if the item is not damageable
+     */
+    private static boolean stackEqualExact(ItemStack stack1, ItemStack stack2)
+    {
+        return stack1.getItem() == stack2.getItem() && (!stack1.getHasSubtypes() || stack1.getMetadata() == stack2.getMetadata()) && ItemStack.areItemStackTagsEqual(stack1, stack2);
+    }
+
     private CrusherRecipes(){
         recipes.add(new CrusherRecipe(new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT), 0.0F));
     }
 
-    public void addRecipe(ItemStack input, ItemStack output, float experience){
-        if (input.isEmpty()) return;
-        if (output.isEmpty()) return;
-        if (experience < 0.0F) return;
-        recipes.add(new CrusherRecipe(input, output, experience));
-    }
 
 
     public static class CrusherRecipe {

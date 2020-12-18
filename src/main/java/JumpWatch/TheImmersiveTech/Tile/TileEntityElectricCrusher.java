@@ -1,6 +1,7 @@
 package JumpWatch.TheImmersiveTech.Tile;
 
 import JumpWatch.TheImmersiveTech.blocks.FluidTank;
+import JumpWatch.TheImmersiveTech.blocks.guis.GuiElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.recipes.CrusherRecipes;
 import JumpWatch.TheImmersiveTech.utils.ModSettings;
 
@@ -56,26 +57,37 @@ public class TileEntityElectricCrusher extends TileEntity implements ITickable, 
     }
 
 
-    //This will be redone so its not fucked..
     public boolean canProcess(){
+        //This seems fine, lest test
         // See if there is even any Recipes
         // No input
-        if(handler.getStackInSlot(0).isEmpty()) return false;
-
-        // No recipe
-        if(CrusherRecipes.findRecipe(handler.getStackInSlot(0)) == null) return false;
-
-        // No space
-        if(handler.getStackInSlot(1).getCount() > handler.getStackInSlot(1).getMaxStackSize()) return false;
-
-        // Not same output
-        //if((output.getItem() != handler.getStackInSlot(1).getItem()) || (!handler.getStackInSlot(1).isEmpty()))  return false;
-        if (handler.getStackInSlot(1).isEmpty()){
-            return true;
-        } else if (!ItemStack.areItemsEqual(CrusherRecipes.findRecipe(handler.getStackInSlot(0)).getInput(), handler.getStackInSlot(1))){
+        helplogger.info("Checking input");
+        if(handler.getStackInSlot(0).isEmpty()){
+            //Make the progress bar go down if slot is empty and there was progress.
+            if (!(cookTime == 0)) cookTime--;
             return false;
         }
+        helplogger.info("Checking input count");
+        /* Idk
+        if (!(handler.getStackInSlot(0).getCount() < 65)) return false; //this line is dumb just ignore it.
+        */
+        // No recipe
+        helplogger.info("Checking if input is a recipe");
+        CrusherRecipes.CrusherRecipe recipe = CrusherRecipes.findRecipe(handler.getStackInSlot(0));
+        if(recipe == null) return false; //this line
+
+        ItemStack outputSlot = handler.getStackInSlot(1);
+
+        // it is missing
+        // Check recipe output matches the content of the output slot
+        if(!outputSlot.isEmpty() && !ItemStack.areItemsEqual(recipe.getOutput(), outputSlot)) return false;
+
+        // No space
+        helplogger.info("Checking if output is more then max stack");
+        if(outputSlot.getCount() + recipe.getOutput().getCount() > outputSlot.getMaxStackSize()) return false;
+
         // Passes all checks
+        helplogger.info("Everything good to go!");
         return true;
     }
 
@@ -93,7 +105,7 @@ public class TileEntityElectricCrusher extends TileEntity implements ITickable, 
     }
 
     public void doProcess(){
-        handler.insertItem(1, CrusherRecipes.findRecipe(handler.getStackInSlot(0)).getOutput().copy(), false);
+        handler.insertItem(1, CrusherRecipes.findRecipe(handler.getStackInSlot(0)).getOutput(), false); //When i was trying on my own this was the line the system complained about after.
         handler.extractItem(0, 1, false);
 
     }
