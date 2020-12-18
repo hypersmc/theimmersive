@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-@Mod(modid = TheImmersiveTech.MODID, name = TheImmersiveTech.NAME, version = TheImmersiveTech.VERSION, dependencies = "required-after:hypercore;")
+@Mod(modid = TheImmersiveTech.MODID, name = TheImmersiveTech.NAME, version = TheImmersiveTech.VERSION, dependencies = "required-after:hypercore;required-after:zerocore;")
 public class TheImmersiveTech {
     @SidedProxy(clientSide = "JumpWatch.TheImmersiveTech.ClientProxy", serverSide = "JumpWatch.TheImmersiveTech.ServerProxy")
     public static CommonProxy proxy;

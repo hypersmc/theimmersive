@@ -34,16 +34,14 @@ minecraft {
 }
 
 repositories {
-    maven {
-        url "http://maven.zerono.it/"
-    }
+
 }
 
 dependencies {
     provided files("extra/HyperCore-1.8.jar")
     provided files("extra/RedstoneFlux-1.12-2.1.0.6-universal.jar")
-    //compile group: "it.zerono.mods.zerocore", name: "zerocore", version: "1.12.2-0.1.2.8"
-    //compile group: "dan200.computercraft.ComputerCraft.1.80pr0-build0", name: "computercraft", version: "1.80pr0-build0"
+    provided files("extra/zerocore-1.12.2-0.1.2.8.jar")
+
 
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
