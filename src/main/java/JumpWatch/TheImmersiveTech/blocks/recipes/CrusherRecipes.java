@@ -34,9 +34,7 @@ public class CrusherRecipes {
         return stack1.getItem() == stack2.getItem() && (!stack1.getHasSubtypes() || stack1.getMetadata() == stack2.getMetadata()) && ItemStack.areItemStackTagsEqual(stack1, stack2);
     }
 
-    private CrusherRecipes(){
-        recipes.add(new CrusherRecipe(new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT), 0.0F));
-    }
+
 
 
 

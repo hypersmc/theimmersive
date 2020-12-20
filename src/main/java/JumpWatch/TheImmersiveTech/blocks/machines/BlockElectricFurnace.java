@@ -19,6 +19,7 @@ import net.minecraft.block.ITileEntityProvider;
 import javax.annotation.Nullable;
 
 import java.util.List;
+import java.util.Random;
 
 public class BlockElectricFurnace extends BlockBase implements ITileEntityProvider {
     public final static String INTERNAL_NAME = "electric_furnace";
@@ -30,6 +31,17 @@ public class BlockElectricFurnace extends BlockBase implements ITileEntityProvid
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntitiyEletricFurnace();
     }
+
+    /*@Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        super.updateTick(worldIn, pos, state, rand);
+
+        if (!worldIn.isAreaLoaded(pos, 1)) return;
+        if (TileEntitiyEletricFurnace.cookTime > 0 && TileEntitiyEletricFurnace.cookTime < 101) {
+            state = state.withProperty());
+            worldIn.setBlockState(pos, , 2);
+        }
+    }*/
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {

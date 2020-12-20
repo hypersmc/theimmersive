@@ -1,7 +1,11 @@
 package JumpWatch.TheImmersiveTech.blocks.recipes;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.init.Items;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Map;
 
@@ -9,51 +13,44 @@ import com.google.common.collect.Table;
 import com.google.common.collect.Maps;
 import com.google.common.collect.HashBasedTable;
 public class FurnaceRecipes {
-    private static final FurnaceRecipes INSTANCE = new FurnaceRecipes();
-    private final Table<ItemStack, ItemStack, ItemStack> smeltingList = HashBasedTable.<ItemStack, ItemStack, ItemStack>create();
-    private final Map<ItemStack, Float> experienceList = Maps.<ItemStack, Float>newHashMap();
-    public static FurnaceRecipes getInstance() {
-        return INSTANCE;
+    private static final List<FurnaceRecipe> recipes = new ArrayList<>();
+
+    public static void FurnaceRecipes(){
+        recipes.add(new FurnaceRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.IRON_INGOT), new ItemStack(Blocks.BEACON), 0.0f));
     }
 
-    private FurnaceRecipes() {
-        // nothing-here-to-see-:)
-        addEletricRecipe(new ItemStack(Items.COAL), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.GOLD_INGOT), 0.0F);
-        addEletricRecipe(new ItemStack(Items.IRON_INGOT), new ItemStack(Items.COAL), new ItemStack(Items.IRON_INGOT), 0.0F);
-        // addEletricRecipe(new ItemStack(), new ItemStack(Blocks.IRON_ORE), new
-        // ItemStack(Items.IRON_INGOT), 0.0F);
-    }
+    public static FurnaceRecipe findRecipe(ItemStack input, ItemStack input2) {
+        if (input.isEmpty()) return null;
+        if (input2.isEmpty()) return null;
 
-    public void addEletricRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) {
-        if (getEletricResult(input1, input2) != ItemStack.EMPTY)
-            return;
-        this.smeltingList.put(input1, input2, result);
-        this.experienceList.put(result, Float.valueOf(experience));
-    }
-
-    public ItemStack getEletricResult(ItemStack input1, ItemStack input2) {
-        for (Entry<ItemStack, Map<ItemStack, ItemStack>> entry : this.smeltingList.columnMap().entrySet()) {
-            if (this.compareItemStacks(input1, (ItemStack) entry.getKey())) {
-                for (Entry<ItemStack, ItemStack> ent : entry.getValue().entrySet()) {
-                    if (this.compareItemStacks(input2, (ItemStack) ent.getKey())) {
-                        return ((ItemStack) ent.getValue()).copy();
-                    }
-                }
+        for (FurnaceRecipe recipe : recipes) {
+            if ((stackEqualExact(recipe.input, input)) && (stackEqualExact(recipe.input2, input2))) {
+                return recipe;
             }
         }
-        return ItemStack.EMPTY;
+        return null;
+    }
+    /**
+     * Checks item, NBT, and meta if the item is not damageable
+     */
+    private static boolean stackEqualExact(ItemStack stack1, ItemStack stack2)
+    {
+        return stack1.getItem() == stack2.getItem() && (!stack1.getHasSubtypes() || stack1.getMetadata() == stack2.getMetadata()) && ItemStack.areItemStackTagsEqual(stack1, stack2);
     }
 
-    private boolean compareItemStacks(ItemStack stack1, ItemStack stack2) {
-        return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
-    }
-
-    public float getEletrickExperience(ItemStack stack) {
-        for (Entry<ItemStack, Float> entry : this.experienceList.entrySet()) {
-            if (this.compareItemStacks(stack, (ItemStack) entry.getKey())) {
-                return ((Float) entry.getValue()).floatValue();
-            }
+    public static class FurnaceRecipe {
+        private final ItemStack input;
+        private final ItemStack input2;
+        private final ItemStack output;
+        private final float experience;
+        public FurnaceRecipe(ItemStack input, ItemStack input2, ItemStack output, float experience){
+            this.input = input;
+            this.input2 = input2;
+            this.output = output;
+            this.experience = experience;
         }
-        return 0.0F;
+        public ItemStack getOutput(){
+            return output.copy();
+        }
     }
 }

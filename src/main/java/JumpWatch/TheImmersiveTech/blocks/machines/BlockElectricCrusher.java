@@ -21,6 +21,7 @@ import net.minecraft.block.ITileEntityProvider;
 import javax.annotation.Nullable;
 
 import java.util.List;
+import java.util.Random;
 
 public class BlockElectricCrusher extends BlockBase implements ITileEntityProvider {
     public final static String INTERNAL_NAME = "electric_crusher";
@@ -49,6 +50,8 @@ public class BlockElectricCrusher extends BlockBase implements ITileEntityProvid
         }
         return true;
     }
+
+
 
     @Override
     public boolean hasTileEntity() {

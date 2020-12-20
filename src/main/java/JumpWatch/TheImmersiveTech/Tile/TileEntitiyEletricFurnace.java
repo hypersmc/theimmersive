@@ -1,7 +1,11 @@
 package JumpWatch.TheImmersiveTech.Tile;
 
+import JumpWatch.TheImmersiveTech.blocks.recipes.CrusherRecipes;
 import JumpWatch.TheImmersiveTech.blocks.recipes.FurnaceRecipes;
 import JumpWatch.TheImmersiveTech.utils.ModSettings;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.energy.IEnergyStorage;
 
@@ -13,6 +17,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.item.ItemStack;
 import net.minecraft.entity.player.EntityPlayer;
 
+import java.util.Random;
+
 public class TileEntitiyEletricFurnace extends TileEntity implements ITickable, IEnergyStorage {
     int tick;
     public int energy = 0;
@@ -20,7 +26,7 @@ public class TileEntitiyEletricFurnace extends TileEntity implements ITickable, 
     public int forevery = ModSettings.furnaceProperties.foreach;
     public ItemStackHandler handler = new ItemStackHandler(3);
     private String customName;
-    public int cookTime;
+    public static int cookTime;
     public int dontbother;
     private ItemStack smelting = ItemStack.EMPTY;
     @Override
@@ -31,37 +37,51 @@ public class TileEntitiyEletricFurnace extends TileEntity implements ITickable, 
         if (tick == 0) {
             // System.out.println(Integer.toString(energy));
         }
-        ItemStack[] inputs = new ItemStack[]{handler.getStackInSlot(0), handler.getStackInSlot(1)};
-        if (energy >= forevery) {
-            if (cookTime > 0) {
-                cookTime++;
-                energy -= forevery;
-                if (cookTime == 100) {
-                    if (handler.getStackInSlot(2).getCount() > 0) {
-                        handler.getStackInSlot(2).grow(1);
-                    } else {
-                        handler.insertItem(2, smelting, false);
-                    }
-                    smelting = ItemStack.EMPTY;
-                    cookTime = 0;
-                    return;
-                }
-            } else {
-                if (!inputs[0].isEmpty() && !inputs[1].isEmpty()) {
-                    ItemStack output = FurnaceRecipes.getInstance().getEletricResult(inputs[0], inputs[1]);
-                    if (!output.isEmpty()) {
-                        if (handler.getStackInSlot(2).getCount() + output.getCount() <= output.getMaxStackSize()) {
-                            smelting = output;
-                            cookTime++;
-                            inputs[0].shrink(1);
-                            inputs[1].shrink(1);
-                            handler.setStackInSlot(0, inputs[0]);
-                            handler.setStackInSlot(1, inputs[1]);
-                        }
-                    }
-                }
-            }
+        if (energy < forevery) return;
+
+        if (canProcess()){
+            processTick();
         }
+
+    }
+
+    public boolean canProcess(){
+        // No input
+        if (handler.getStackInSlot(0).isEmpty() || handler.getStackInSlot(1).isEmpty()){
+            //Make the progress bar go down if slot is empty and there was progress.
+            if (!(cookTime == 0)) cookTime--;
+            return false;
+        }
+
+        FurnaceRecipes.FurnaceRecipe recipe = FurnaceRecipes.findRecipe(handler.getStackInSlot(0), handler.getStackInSlot(1));
+        if (recipe == null) return false;
+
+        ItemStack outputSlot = handler.getStackInSlot(2);
+        // it is missing
+        // Check recipe output matches the content of the output slot
+        if(!outputSlot.isEmpty() && !ItemStack.areItemsEqual(recipe.getOutput(), outputSlot)) return false;
+
+        // No space
+        if(outputSlot.getCount() + recipe.getOutput().getCount() > outputSlot.getMaxStackSize()) return false;
+
+        // Passes all checks
+        return true;
+
+    }
+    public void processTick(){
+        cookTime++;
+        // Spent resources
+        energy -= forevery;
+        if (cookTime == 100) {
+            cookTime = 0;
+            // Process finished
+            doProcess();
+        }
+    }
+    public void doProcess(){
+        handler.insertItem(2, FurnaceRecipes.findRecipe(handler.getStackInSlot(0), handler.getStackInSlot(1)).getOutput(), false); //When i was trying on my own this was the line the system complained about after.
+        handler.extractItem(0, 1, false);
+        handler.extractItem(1, 1, false);
     }
 
     @Override
@@ -71,6 +91,8 @@ public class TileEntitiyEletricFurnace extends TileEntity implements ITickable, 
         }
         return super.hasCapability(capability, facing);
     }
+
+
 
     @SuppressWarnings("unchecked")
     @Override

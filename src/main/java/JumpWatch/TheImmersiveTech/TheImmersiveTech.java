@@ -1,6 +1,7 @@
 package JumpWatch.TheImmersiveTech;
 
 import JumpWatch.TheImmersiveTech.blocks.recipes.CrusherRecipes;
+import JumpWatch.TheImmersiveTech.blocks.recipes.FurnaceRecipes;
 import JumpWatch.TheImmersiveTech.items.SolarPanelController;
 import JumpWatch.TheImmersiveTech.items.cabels.*;
 import JumpWatch.TheImmersiveTech.items.itemsolarpanelcontroller;
@@ -81,6 +82,7 @@ public class TheImmersiveTech {
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
         CrusherRecipes.CrusherRecipes();
+        FurnaceRecipes.FurnaceRecipes();
         proxy.preinit(event);
     }
 

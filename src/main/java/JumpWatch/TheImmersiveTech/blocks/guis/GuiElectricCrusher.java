@@ -7,6 +7,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class GuiElectricCrusher extends GuiContainer {
     private static final ResourceLocation TEXTURES = new ResourceLocation(TheImmersiveTech.MODID + ":textures/gui/electric_crusher.png");
@@ -37,8 +38,13 @@ public class GuiElectricCrusher extends GuiContainer {
         int k = this.getEnergyStoredScaled(75);
         this.drawTexturedModalRect(this.guiLeft + 152, this.guiTop + 7, 176, 32, 16, 75 - k);
         //Fluid W.I.P
+        String fluid = FluidRegistry.getFluid(tileentity.tank.getFluid().getLocalizedName()).getName();
 
+        if (this.tileentity.tank.getFluidAmount() > 0 && fluid != null) {
+
+        }
     }
+
 
 
 

@@ -2,6 +2,7 @@ package JumpWatch.TheImmersiveTech.Tile;
 
 import JumpWatch.TheImmersiveTech.blocks.FluidTank;
 import JumpWatch.TheImmersiveTech.blocks.guis.GuiElectricCrusher;
+import JumpWatch.TheImmersiveTech.blocks.machines.BlockElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.recipes.CrusherRecipes;
 import JumpWatch.TheImmersiveTech.utils.ModSettings;
 
@@ -35,7 +36,7 @@ public class TileEntityElectricCrusher extends TileEntity implements ITickable, 
     public ItemStackHandler handler = new ItemStackHandler(2);
     private String customName;
     protected FluidStack fluid;
-    public int cookTime;
+    public static int cookTime;
     protected int capacity = 0;
     private ItemStack smelting = ItemStack.EMPTY;
     public FluidTank tank = new FluidTank(this, 3000);
@@ -58,21 +59,13 @@ public class TileEntityElectricCrusher extends TileEntity implements ITickable, 
 
 
     public boolean canProcess(){
-        //This seems fine, lest test
-        // See if there is even any Recipes
         // No input
-        helplogger.info("Checking input");
         if(handler.getStackInSlot(0).isEmpty()){
             //Make the progress bar go down if slot is empty and there was progress.
             if (!(cookTime == 0)) cookTime--;
             return false;
         }
-        helplogger.info("Checking input count");
-        /* Idk
-        if (!(handler.getStackInSlot(0).getCount() < 65)) return false; //this line is dumb just ignore it.
-        */
         // No recipe
-        helplogger.info("Checking if input is a recipe");
         CrusherRecipes.CrusherRecipe recipe = CrusherRecipes.findRecipe(handler.getStackInSlot(0));
         if(recipe == null) return false; //this line
 
@@ -83,11 +76,8 @@ public class TileEntityElectricCrusher extends TileEntity implements ITickable, 
         if(!outputSlot.isEmpty() && !ItemStack.areItemsEqual(recipe.getOutput(), outputSlot)) return false;
 
         // No space
-        helplogger.info("Checking if output is more then max stack");
         if(outputSlot.getCount() + recipe.getOutput().getCount() > outputSlot.getMaxStackSize()) return false;
-
         // Passes all checks
-        helplogger.info("Everything good to go!");
         return true;
     }
 
@@ -153,6 +143,7 @@ public class TileEntityElectricCrusher extends TileEntity implements ITickable, 
         if (compound.hasKey("Name"))
             this.customName = compound.getString("Name");
     }
+
 
     public int getEnergyStored() {
         return this.energy;
