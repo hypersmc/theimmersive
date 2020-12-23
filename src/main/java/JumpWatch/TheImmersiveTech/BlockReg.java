@@ -1,5 +1,6 @@
 package JumpWatch.TheImmersiveTech;
 
+import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockWall;
 import JumpWatch.TheImmersiveTech.Tile.TileEntitiyEletricFurnace;
 import JumpWatch.TheImmersiveTech.Tile.TileEntityElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.furnace.FurnaceBlock;
@@ -60,10 +61,12 @@ public class BlockReg {
         blockElectricCrusher.registerItemModel(Item.getItemFromBlock(blockElectricCrusher));
 
     }
+
     public void init(FMLInitializationEvent event){
         helplogger.info("This worked9!");
     }
 
+    public static final MBFurnaceBlockWall MB_FURNACE_BLOCK_WALL = new MBFurnaceBlockWall("mightyFurnaceWall");
 
     @SideOnly(Side.CLIENT)
     public static void initModels(){
