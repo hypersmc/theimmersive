@@ -76,5 +76,6 @@ public class BlockReg {
         //brocken blocks
         spbb.initModel();
         spcbb.initModel();
+        MB_FURNACE_BLOCK_WALL.initModels();
     }
 }

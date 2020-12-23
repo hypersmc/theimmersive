@@ -73,7 +73,7 @@ public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, new IProperty[] {FACES});
     }
-    protected void initBlock(){
+    public void initModels(){
         super.initBlock();
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACES, PropertyBlockFacings.All));
     }
