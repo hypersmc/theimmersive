@@ -1,5 +1,7 @@
 package JumpWatch.TheImmersiveTech;
 
+import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockWall;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceTileEntity;
 import JumpWatch.TheImmersiveTech.Tile.TileEntitiyEletricFurnace;
 import JumpWatch.TheImmersiveTech.Tile.TileEntityElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.machines.BlockElectricCrusher;
@@ -32,6 +34,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(this);
         GameRegistry.registerTileEntity(TileEntitiyEletricFurnace.class, new ResourceLocation(TheImmersiveTech.MODID, "electric_furnace"));
         GameRegistry.registerTileEntity(TileEntityElectricCrusher.class, new ResourceLocation(TheImmersiveTech.MODID, "electric_crusher"));
+        //GameRegistry.registerTileEntity(MBFurnaceTileEntity.class, new ResourceLocation(TheImmersiveTech.MODID, "mb_furnace"));
         helplogger.info("this worked2");
         OBJLoader.INSTANCE.addDomain(TheImmersiveTech.MODID);
     }
@@ -50,7 +53,7 @@ public class ClientProxy extends CommonProxy {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(TheImmersiveTech.item_cable), 0, new ModelResourceLocation(TheImmersiveTech.MODID + ":item_cable", "inventory"));
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(TheImmersiveTech.Solar_PanelC), 0, new ModelResourceLocation(TheImmersiveTech.MODID + ":solarpanelcontroller", "inventory"));
         //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(TheImmersiveTech.voltmeter, 0, new ModelResourceLocation(TheImmersiveTech.MODID + ":voltmeter", "inventory"));
-
+        BlockReg.initModels();
     }
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {

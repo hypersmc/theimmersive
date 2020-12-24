@@ -1,6 +1,11 @@
 tile.item_cable.name=Item Cable
 tile.optic_cable.name=Optic Cable
 tile.fluid_cable.name=fluid Cable
+tile.mbfurnacewall.name=Furnace Wall
+tile.mbfurnacefluidport.name= Furnace Fluid port
+tile.mbfurnacepowerport.name= Furnace Power port
+tile.mbfurnaceoutputport.name= Furnace Output port
+tile.mbfurnaceinputport.name= Furnace Input port
 item.voltmeter.name=Voltmeter
 tile.theimmersivetech.efurnace.name=Eletric Furnace
 tile.theimmersivetech.solarpanelblock.name=Solar Panel

@@ -1,5 +1,7 @@
 package JumpWatch.TheImmersiveTech;
 
+import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockPort;
+import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockType;
 import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockWall;
 import JumpWatch.TheImmersiveTech.Tile.TileEntitiyEletricFurnace;
 import JumpWatch.TheImmersiveTech.Tile.TileEntityElectricCrusher;
@@ -66,7 +68,11 @@ public class BlockReg {
         helplogger.info("This worked9!");
     }
 
-    public static final MBFurnaceBlockWall MB_FURNACE_BLOCK_WALL = new MBFurnaceBlockWall("mightyFurnaceWall");
+    public static final MBFurnaceBlockWall MB_FURNACE_BLOCK_WALL = new MBFurnaceBlockWall("mbfurnaceWall");
+    public static final MBFurnaceBlockPort MB_FURNACE_BLOCK_PowerPORT = new MBFurnaceBlockPort("mbfurnacepowerport", MBFurnaceBlockType.Power);
+    public static final MBFurnaceBlockPort MB_FURNACE_BLOCK_InputPORT = new MBFurnaceBlockPort("mbfurnaceoutputport", MBFurnaceBlockType.Output);
+    public static final MBFurnaceBlockPort MB_FURNACE_BLOCK_OutputPORT = new MBFurnaceBlockPort("mbfurnaceinputport", MBFurnaceBlockType.Input);
+    public static final MBFurnaceBlockPort MB_FURNACE_BLOCK_FluidPORT = new MBFurnaceBlockPort("mbfurnacefluidport", MBFurnaceBlockType.Fluid);
 
     @SideOnly(Side.CLIENT)
     public static void initModels(){
@@ -76,6 +82,10 @@ public class BlockReg {
         //brocken blocks
         spbb.initModel();
         spcbb.initModel();
-        MB_FURNACE_BLOCK_WALL.initModels();
+        MB_FURNACE_BLOCK_WALL.initBlock();
+        MB_FURNACE_BLOCK_PowerPORT.initBlock();
+        MB_FURNACE_BLOCK_InputPORT.initBlock();
+        MB_FURNACE_BLOCK_OutputPORT.initBlock();
+        MB_FURNACE_BLOCK_FluidPORT.initBlock();
     }
 }

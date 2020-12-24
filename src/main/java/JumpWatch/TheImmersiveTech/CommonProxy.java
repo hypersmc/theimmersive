@@ -1,5 +1,13 @@
 package JumpWatch.TheImmersiveTech;
 
+import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockBase;
+import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockPort;
+import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockType;
+import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockWall;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceFluidIOPortTileEntitiy;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceIOPortTileEntity;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnacePowerTileEntity;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceTileEntity;
 import JumpWatch.TheImmersiveTech.Tile.SolarControllerTileEntity;
 import JumpWatch.TheImmersiveTech.blocks.furnace.FurnaceBlock;
 import JumpWatch.TheImmersiveTech.blocks.machines.solarpanelblock;
@@ -15,6 +23,7 @@ import JumpWatch.hypercore.utils.helplogger;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -29,6 +38,10 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 @Mod.EventBusSubscriber
 public class CommonProxy{
+    public static final ResourceLocation MBFP = new ResourceLocation(TheImmersiveTech.MODID, "mb_fluidport");
+    public static final ResourceLocation MBIP = new ResourceLocation(TheImmersiveTech.MODID, "mb_inputport");
+    public static final ResourceLocation MBOP = new ResourceLocation(TheImmersiveTech.MODID, "mb_outputport");
+    public static final ResourceLocation MBPP = new ResourceLocation(TheImmersiveTech.MODID, "mb_powerport");
 
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
@@ -37,7 +50,10 @@ public class CommonProxy{
         GameRegistry.registerTileEntity(FluidCableTileEntiity.class, "fluid_cable");
         GameRegistry.registerTileEntity(ItemCableTileEntitiy.class, "item_cable");
         GameRegistry.registerTileEntity(SolarControllerTileEntity.class, "solarpanelcontroller");
-
+        GameRegistry.registerTileEntity(MBFurnaceTileEntity.class, MBFurnaceBlockType.Wall.getName());
+        GameRegistry.registerTileEntity(MBFurnacePowerTileEntity.class, MBFurnaceBlockType.Power.getName());
+        GameRegistry.registerTileEntity(MBFurnaceIOPortTileEntity.class, MBFurnaceBlockType.Output.getName());
+        GameRegistry.registerTileEntity(MBFurnaceFluidIOPortTileEntitiy.class, MBFurnaceBlockType.Fluid.getName());
 
     }
     @SubscribeEvent
@@ -55,10 +71,20 @@ public class CommonProxy{
         event.getRegistry().register(new solarpanelblock());
         event.getRegistry().register(new solarpanelcontrollerbrokenblock());
         event.getRegistry().register(new solarpanelbrokenblock());
+        event.getRegistry().register(new MBFurnaceBlockWall("mbfurnaceWall"));
+        event.getRegistry().register(new MBFurnaceBlockPort("mbfurnacepowerport", MBFurnaceBlockType.Power));
+        event.getRegistry().register(new MBFurnaceBlockPort("mbfurnaceoutputport", MBFurnaceBlockType.Output));
+        event.getRegistry().register(new MBFurnaceBlockPort("mbfurnaceinputport", MBFurnaceBlockType.Input));
+        event.getRegistry().register(new MBFurnaceBlockPort("mbfurnacefluidport", MBFurnaceBlockType.Fluid));
         GameRegistry.registerTileEntity(CableTileEntity.class, "optic_cable");
         GameRegistry.registerTileEntity(FluidCableTileEntiity.class, "fluid_cable");
         GameRegistry.registerTileEntity(ItemCableTileEntitiy.class, "item_cable");
         GameRegistry.registerTileEntity(SolarControllerTileEntity.class, "solarpanelcontroller");
+
+        GameRegistry.registerTileEntity(MBFurnaceTileEntity.class, MBFurnaceBlockType.Wall.getName());
+        GameRegistry.registerTileEntity(MBFurnacePowerTileEntity.class, MBFurnaceBlockType.Power.getName());
+        GameRegistry.registerTileEntity(MBFurnaceIOPortTileEntity.class, MBFurnaceBlockType.Output.getName());
+        GameRegistry.registerTileEntity(MBFurnaceFluidIOPortTileEntitiy.class, MBFurnaceBlockType.Fluid.getName());
         helplogger.info("This worked!");
     }
     @SubscribeEvent
@@ -71,6 +97,13 @@ public class CommonProxy{
         event.getRegistry().register(new ItemBlock(BlockReg.Solarpanel).setRegistryName(solarpanelblock.SPanel));
         event.getRegistry().register(new ItemBlock(BlockReg.spbb).setRegistryName(solarpanelbrokenblock.SPanelB));
         event.getRegistry().register(new ItemBlock(BlockReg.spcbb).setRegistryName(solarpanelcontrollerbrokenblock.SPanelBb));
+
+        event.getRegistry().register(new ItemBlock(BlockReg.MB_FURNACE_BLOCK_WALL).setRegistryName(MBFurnaceBlockWall.MBF));
+        event.getRegistry().register(new ItemBlock(BlockReg.MB_FURNACE_BLOCK_FluidPORT).setRegistryName(MBFP));
+        event.getRegistry().register(new ItemBlock(BlockReg.MB_FURNACE_BLOCK_PowerPORT).setRegistryName(MBPP));
+        event.getRegistry().register(new ItemBlock(BlockReg.MB_FURNACE_BLOCK_OutputPORT).setRegistryName(MBOP));
+        event.getRegistry().register(new ItemBlock(BlockReg.MB_FURNACE_BLOCK_InputPORT).setRegistryName(MBIP));
+
         //event.getRegistry().registerAll(TheImmersiveTech.iCopper);
     }
     public void init(FMLInitializationEvent event) {

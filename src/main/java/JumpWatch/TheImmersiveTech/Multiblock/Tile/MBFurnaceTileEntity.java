@@ -8,27 +8,27 @@ import it.zerono.mods.zerocore.api.multiblock.validation.IMultiblockValidator;
 public class MBFurnaceTileEntity extends RectangularMultiblockTileEntityBase {
     @Override
     public boolean isGoodForFrame(IMultiblockValidator iMultiblockValidator){
-        return false;
+        return true;
     }
 
     @Override
     public boolean isGoodForSides(IMultiblockValidator iMultiblockValidator) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isGoodForTop(IMultiblockValidator iMultiblockValidator) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isGoodForBottom(IMultiblockValidator iMultiblockValidator) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isGoodForInterior(IMultiblockValidator iMultiblockValidator) {
-        return false;
+        return true;
     }
 
     @Override

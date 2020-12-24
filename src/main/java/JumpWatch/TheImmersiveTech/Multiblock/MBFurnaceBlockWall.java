@@ -1,6 +1,7 @@
 package JumpWatch.TheImmersiveTech.Multiblock;
 
 import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceTileEntity;
+import JumpWatch.TheImmersiveTech.TheImmersiveTech;
 import com.google.common.collect.Lists;
 import it.zerono.mods.zerocore.api.multiblock.IMultiblockPart;
 import it.zerono.mods.zerocore.lib.BlockFacings;
@@ -10,21 +11,29 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 
 public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
+    public static final ResourceLocation MBF = new ResourceLocation(TheImmersiveTech.MODID, "mb_furnace");
 
     public MBFurnaceBlockWall(String name) {
         super(name, MBFurnaceBlockType.Wall);
+        setUnlocalizedName("mbfurnacewall");
     }
 
     @Override
@@ -73,8 +82,9 @@ public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, new IProperty[] {FACES});
     }
-    public void initModels(){
-        super.initBlock();
+    @Override
+    public void initBlock(){
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACES, PropertyBlockFacings.All));
     }
 

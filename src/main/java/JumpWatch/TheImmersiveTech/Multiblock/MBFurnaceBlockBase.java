@@ -21,9 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class MBFurnaceBlockBase extends BlockBase implements ITileEntityProvider {
-    public final static String INTERNAL_NAME = "mbfurnace";
     public MBFurnaceBlockBase(String name, MBFurnaceBlockType blockType) {
-        super(Material.IRON, INTERNAL_NAME);
+        super(Material.IRON, name);
         this._myType = blockType;
     }
 
@@ -67,7 +66,8 @@ public class MBFurnaceBlockBase extends BlockBase implements ITileEntityProvider
     }
 
     protected void initBlock() {
-
+        this.setHardness(1.5F);
+        this.setResistance(10.0F);
         GameRegistry.registerTileEntity(MBFurnaceTileEntity.class, MBFurnaceBlockType.Wall.getName());
         GameRegistry.registerTileEntity(MBFurnacePowerTileEntity.class, MBFurnaceBlockType.Power.getName());
         GameRegistry.registerTileEntity(MBFurnaceIOPortTileEntity.class, MBFurnaceBlockType.Output.getName());
