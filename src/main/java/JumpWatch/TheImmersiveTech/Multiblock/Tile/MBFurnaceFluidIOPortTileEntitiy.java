@@ -1,5 +1,6 @@
 package JumpWatch.TheImmersiveTech.Multiblock.Tile;
 
+import it.zerono.mods.zerocore.api.multiblock.validation.IMultiblockValidator;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
@@ -11,7 +12,14 @@ public class MBFurnaceFluidIOPortTileEntitiy extends MBFurnaceTileEntity impleme
     public FluidStack getFluid() {
         return null;
     }
-
+    @Override
+    public boolean isGoodForInterior(IMultiblockValidator iMultiblockValidator) {
+        return false;
+    }
+    @Override
+    public boolean isGoodForFrame(IMultiblockValidator iMultiblockValidator){
+        return false;
+    }
     @Override
     public int getFluidAmount() {
         return 0;

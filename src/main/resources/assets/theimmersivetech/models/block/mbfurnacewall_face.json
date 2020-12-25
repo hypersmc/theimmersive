@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "up": "theimmersivetech:blocks/multiblock/elefurnace/FaceCenterEmpty",
+    "down": "theimmersivetech:blocks/multiblock/elefurnace/FaceCenterEmpty",
+    "north": "theimmersivetech:blocks/multiblock/elefurnace/FaceCenterFront",
+    "south": "theimmersivetech:blocks/multiblock/elefurnace/FaceCenterFront",
+    "west": "theimmersivetech:blocks/multiblock/elefurnace/FaceCenterFront",
+    "east": "theimmersivetech:blocks/multiblock/elefurnace/FaceCenterFront"
+  }
+}

@@ -1,5 +1,6 @@
 package JumpWatch.TheImmersiveTech.Multiblock.Tile;
 
+import it.zerono.mods.zerocore.api.multiblock.validation.IMultiblockValidator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -17,7 +18,14 @@ public class MBFurnaceIOPortTileEntity extends MBFurnaceTileEntity implements II
         this._inventory = null;
     }
 
-
+    @Override
+    public boolean isGoodForInterior(IMultiblockValidator iMultiblockValidator) {
+        return false;
+    }
+    @Override
+    public boolean isGoodForFrame(IMultiblockValidator iMultiblockValidator){
+        return false;
+    }
     @Override
     public void readFromNBT(NBTTagCompound data) {
 

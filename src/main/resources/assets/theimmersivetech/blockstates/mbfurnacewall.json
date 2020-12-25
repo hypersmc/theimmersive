@@ -1,0 +1,33 @@
+{
+  "variants": {
+    "faces=none": { "model": "theimmersivetech:mbfurnaceWall_single" },
+    "faces=all": { "model": "theimmersivetech:mbfurnaceWall_single" },
+    "faces=face_d": { "model": "theimmersivetech:mbfurnaceWall_face" },
+    "faces=face_u": { "model": "theimmersivetech:mbfurnaceWall_face" },
+    "faces=face_e": { "model": "theimmersivetech:mbfurnacewall_face" },
+    "faces=face_w": { "model": "theimmersivetech:mbfurnacewall_face" },
+    "faces=face_s": { "model": "theimmersivetech:mbfurnacewall_face" },
+    "faces=face_n": { "model": "theimmersivetech:mbfurnacewall_face" },
+    "faces=angle_sw": { "model": "theimmersivetech:mbfurnacewall_frame"},
+    "faces=angle_es": { "model": "theimmersivetech:mbfurnacewall_frame", "y": -90},
+    "faces=angle_en": { "model": "theimmersivetech:mbfurnacewall_frame", "y": 180},
+    "faces=angle_nw": { "model": "theimmersivetech:mbfurnacewall_frame", "y": 90},
+    "faces=angle_su": { "model": "theimmersivetech:mbfurnacewall_frame", "x": -90, "y": 90 },
+    "faces=angle_ds": { "model": "theimmersivetech:mbfurnacewall_frame", "x": 90, "y": 90 },
+    "faces=angle_eu": { "model": "theimmersivetech:mbfurnacewall_frame", "x": 90, "y": -180 },
+    "faces=angle_de": { "model": "theimmersivetech:mbfurnacewall_frame", "x": 270, "y": -180 },
+    "faces=angle_nu": { "model": "theimmersivetech:mbfurnacewall_frame", "x": -90, "y": 270 },
+    "faces=angle_dn": { "model": "theimmersivetech:mbfurnacewall_frame", "x": 90, "y": 270 },
+    "faces=angle_uw": { "model": "theimmersivetech:mbfurnacewall_frame", "x": -90, "y": 180 },
+    "faces=angle_dw": { "model": "theimmersivetech:mbfurnacewall_frame", "x": 90, "y": 180 },
+    "faces=corner_suw": { "model": "theimmersivetech:mbfurnacewall_corner" },
+    "faces=corner_dsw": { "model": "theimmersivetech:mbfurnacewall_corner", "x": -90 },
+    "faces=corner_esu": { "model": "theimmersivetech:mbfurnacewall_corner", "y": -90 },
+    "faces=corner_des": { "model": "theimmersivetech:mbfurnacewall_corner", "x": -90, "y": -90 },
+    "faces=corner_enu": { "model": "theimmersivetech:mbfurnacewall_corner", "y": -180 },
+    "faces=corner_nuw": { "model": "theimmersivetech:mbfurnacewall_corner", "y": 90 },
+    "faces=corner_dnw": { "model": "theimmersivetech:mbfurnacewall_corner", "x": 180 },
+    "faces=corner_den": { "model": "theimmersivetech:mbfurnacewall_corner", "x": -90, "y": 180 },
+    "faces=opposite_ew": { "model": "theimmersivetech:mbfurnacewall_face_on" }
+  }
+}

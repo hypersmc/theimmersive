@@ -82,10 +82,10 @@ public class BlockReg {
         //brocken blocks
         spbb.initModel();
         spcbb.initModel();
-        MB_FURNACE_BLOCK_WALL.initBlock();
+        /*MB_FURNACE_BLOCK_WALL.initBlock();
         MB_FURNACE_BLOCK_PowerPORT.initBlock();
         MB_FURNACE_BLOCK_InputPORT.initBlock();
         MB_FURNACE_BLOCK_OutputPORT.initBlock();
-        MB_FURNACE_BLOCK_FluidPORT.initBlock();
+        MB_FURNACE_BLOCK_FluidPORT.initBlock();*/
     }
 }

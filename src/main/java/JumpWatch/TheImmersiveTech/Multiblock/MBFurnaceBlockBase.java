@@ -69,10 +69,6 @@ public class MBFurnaceBlockBase extends BlockBase implements ITileEntityProvider
     protected void initBlock() {
         this.setHardness(1.5F);
         this.setResistance(10.0F);
-        GameRegistry.registerTileEntity(MBFurnaceTileEntity.class, MBFurnaceBlockType.Wall.getName());
-        GameRegistry.registerTileEntity(MBFurnacePowerTileEntity.class, MBFurnaceBlockType.Power.getName());
-        GameRegistry.registerTileEntity(MBFurnaceIOPortTileEntity.class, MBFurnaceBlockType.Output.getName());
-        GameRegistry.registerTileEntity(MBFurnaceFluidIOPortTileEntitiy.class, MBFurnaceBlockType.Fluid.getName());
     }
 
     private MBFurnaceBlockType _myType;

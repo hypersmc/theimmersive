@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 import it.zerono.mods.zerocore.api.multiblock.IMultiblockPart;
 import it.zerono.mods.zerocore.lib.BlockFacings;
 import it.zerono.mods.zerocore.lib.PropertyBlockFacings;
-import it.zerono.mods.zerocore.util.CodeHelper;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,8 +24,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -37,6 +34,10 @@ public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
 
     public MBFurnaceBlockWall(String name) {
         super(name, MBFurnaceBlockType.Wall);
+        this.setHardness(2);
+        this.setResistance(5);
+        this.setCreativeTab(TheImmersiveTech.TITBlocks);
+
         setUnlocalizedName("mbfurnacewall");
     }
 
@@ -46,6 +47,7 @@ public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
         tooltip.add("");
         tooltip.add("Used to make a 3x3 multiblock.");
     }
+
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
