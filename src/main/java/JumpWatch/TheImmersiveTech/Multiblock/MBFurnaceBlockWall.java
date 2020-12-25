@@ -12,8 +12,10 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +28,9 @@ import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
     public static final ResourceLocation MBF = new ResourceLocation(TheImmersiveTech.MODID, "mb_furnace");
@@ -34,6 +38,13 @@ public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
     public MBFurnaceBlockWall(String name) {
         super(name, MBFurnaceBlockType.Wall);
         setUnlocalizedName("mbfurnacewall");
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){
+        tooltip.add("Furnace Wall block");
+        tooltip.add("");
+        tooltip.add("Used to make a 3x3 multiblock.");
     }
 
     @Override
@@ -55,7 +66,7 @@ public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return 0;
+        return 1;
     }
 
     @Override

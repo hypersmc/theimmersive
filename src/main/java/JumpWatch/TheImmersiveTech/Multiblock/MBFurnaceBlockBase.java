@@ -1,5 +1,6 @@
 package JumpWatch.TheImmersiveTech.Multiblock;
 
+import JumpWatch.TheImmersiveTech.BlockReg;
 import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceFluidIOPortTileEntitiy;
 import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceIOPortTileEntity;
 import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnacePowerTileEntity;

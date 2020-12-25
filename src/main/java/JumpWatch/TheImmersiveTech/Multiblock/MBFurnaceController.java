@@ -233,7 +233,6 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
             }
         }
     }
-
     protected EnergyStorage getRFStorage(){
         if (null == this._rfStorage) this._rfStorage = new EnergyStorage(RF_CAPACITY, RF_PER_OPERATION * 2, RF_PER_OPERATION);
         return this._rfStorage;
@@ -251,7 +250,7 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
     private MBFurnaceFluidIOPortTileEntitiy _fluidPort;
     private boolean _active;
 
-    private EnergyStorage _rfStorage;
+    public static EnergyStorage _rfStorage;
 
     private static final int RF_CAPACITY = 1000000;
     private static final int RF_PER_OPERATION = 100;

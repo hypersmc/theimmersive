@@ -1,5 +1,8 @@
 package JumpWatch.TheImmersiveTech.Multiblock;
 
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceFluidIOPortTileEntitiy;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceIOPortTileEntity;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnacePowerTileEntity;
 import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceTileEntity;
 import JumpWatch.TheImmersiveTech.blocks.BlockBase;
 import it.zerono.mods.zerocore.api.multiblock.IMultiblockPart;
@@ -8,13 +11,20 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+import static JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockType.*;
 
 public class MBFurnaceBlockPort extends MBFurnaceBlockBase {
 
@@ -23,6 +33,7 @@ public class MBFurnaceBlockPort extends MBFurnaceBlockBase {
     public MBFurnaceBlockPort(String name, MBFurnaceBlockType blockType) {
         super(name, blockType);
         setUnlocalizedName(name);
+        this._myType = blockType;
         if (MBFurnaceBlockType.Wall == blockType)
             throw new IllegalArgumentException("Invalid port type");
     }
@@ -76,14 +87,40 @@ public class MBFurnaceBlockPort extends MBFurnaceBlockBase {
 
     public void onBlockAdded(World world, BlockPos position, IBlockState state) {
 
-        //EnumFacing newFacing = this.(world, position, (EnumFacing)state.getValue(BlockBase.HFACING));
+        EnumFacing newFacing = this.suggestDefaultFacing(world, position, (EnumFacing)state.getValue(BlockBase.HFACING));
 
-        //world.setBlockState(position, state.withProperty(BlockBase.HFACING, newFacing), 2);
+        world.setBlockState(position, state.withProperty(BlockBase.HFACING, newFacing), 2);
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, new IProperty[] {BlockBase.HFACING, ASSEMBLED});
+    }
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){
+        switch (this._myType) {
+            case Power:
+                tooltip.add("Furnace Power block");
+                tooltip.add("");
+                tooltip.add("Used to make a 3x3 multiblock.");
+                break;
+            case Fluid:
+                tooltip.add("Furnace Fluid block");
+                tooltip.add("");
+                tooltip.add("Used to make a 3x3 multiblock.");
+                break;
+            case Input:
+                tooltip.add("Furnace Item Input block");
+                tooltip.add("");
+                tooltip.add("Used to make a 3x3 multiblock.");
+                break;
+            case Output:
+                tooltip.add("Furnace Item Output block");
+                tooltip.add("");
+                tooltip.add("Used to make a 3x3 multiblock.");
+                break;
+        }
+
     }
 
     @Override
@@ -92,4 +129,5 @@ public class MBFurnaceBlockPort extends MBFurnaceBlockBase {
         this.setDefaultState(this.blockState.getBaseState().withProperty(BlockBase.HFACING, EnumFacing.NORTH).withProperty(ASSEMBLED, false));
 
     }
+    private MBFurnaceBlockType _myType;
 }

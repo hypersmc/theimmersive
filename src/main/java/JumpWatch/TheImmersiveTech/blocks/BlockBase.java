@@ -4,6 +4,8 @@ import JumpWatch.TheImmersiveTech.TheImmersiveTech;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
 import net.minecraft.item.ItemBlock;
@@ -23,6 +25,14 @@ public class BlockBase extends Block {
         this.setHardness(2);
         this.setResistance(5);
         this.setCreativeTab(TheImmersiveTech.TITBlocks);
+    }
+    protected EnumFacing suggestDefaultFacing(World world, BlockPos position, EnumFacing currentFacing) {
+
+        EnumFacing oppositeFacing = currentFacing.getOpposite();
+        Block facingBlock = world.getBlockState(position.offset(currentFacing)).getBlock();
+        Block oppositeBlock = world.getBlockState(position.offset(oppositeFacing)).getBlock();
+
+        return facingBlock.isFullBlock(world.getBlockState(position)) && !oppositeBlock.isFullBlock(world.getBlockState(position)) ? oppositeFacing : currentFacing;
     }
 
     public Item createItemBlock() {

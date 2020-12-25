@@ -1,12 +1,16 @@
 package JumpWatch.TheImmersiveTech.utils;
 
 import JumpWatch.TheImmersiveTech.Ids;
+import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceController;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceTileEntity;
 import JumpWatch.TheImmersiveTech.Tile.TileEntitiyEletricFurnace;
 import JumpWatch.TheImmersiveTech.Tile.TileEntityElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.Containers.ContainerElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.Containers.ContainerElectricFurnace;
+import JumpWatch.TheImmersiveTech.blocks.Containers.ContainerMBElectricFurnace;
 import JumpWatch.TheImmersiveTech.blocks.guis.GuiElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.guis.GuiElectricFurnace;
+import JumpWatch.TheImmersiveTech.blocks.guis.GuiMBElectricFurnace;
 import JumpWatch.hypercore.utils.helplogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +24,8 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerElectricFurnace(player.inventory, (TileEntitiyEletricFurnace) world.getTileEntity(new BlockPos(x, y, z)));
         if (ID == Ids.GUI_ELECTRIC_CRUSHER)
             return new ContainerElectricCrusher(player.inventory, (TileEntityElectricCrusher) world.getTileEntity(new BlockPos(x, y, z)));
+        if (ID == Ids.GUI_MB_ELECTRIC_FURNACE)
+            return new ContainerMBElectricFurnace(player.inventory, (MBFurnaceTileEntity) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 
@@ -29,6 +35,8 @@ public class GuiHandler implements IGuiHandler {
             return new GuiElectricFurnace(player.inventory, (TileEntitiyEletricFurnace) world.getTileEntity(new BlockPos(x, y, z)));
         if (ID == Ids.GUI_ELECTRIC_CRUSHER)
             return new GuiElectricCrusher(player.inventory, (TileEntityElectricCrusher) world.getTileEntity(new BlockPos(x, y, z)));
+        if (ID == Ids.GUI_MB_ELECTRIC_FURNACE)
+            return new GuiMBElectricFurnace(player.inventory, (MBFurnaceTileEntity) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 }
