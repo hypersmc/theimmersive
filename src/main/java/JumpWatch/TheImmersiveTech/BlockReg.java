@@ -3,26 +3,19 @@ package JumpWatch.TheImmersiveTech;
 import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockPort;
 import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockType;
 import JumpWatch.TheImmersiveTech.Multiblock.MBFurnaceBlockWall;
-import JumpWatch.TheImmersiveTech.Tile.TileEntitiyEletricFurnace;
-import JumpWatch.TheImmersiveTech.Tile.TileEntityElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.furnace.FurnaceBlock;
 import JumpWatch.TheImmersiveTech.blocks.machines.*;
-import JumpWatch.TheImmersiveTech.utils.GuiHandler;
 import JumpWatch.hypercore.utils.helplogger;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 @Mod.EventBusSubscriber
 @GameRegistry.ObjectHolder(TheImmersiveTech.MODID)
 public class BlockReg {
@@ -47,7 +40,16 @@ public class BlockReg {
     @GameRegistry.ObjectHolder(BlockElectricFurnace.INTERNAL_NAME)
     private static BlockElectricFurnace blockElectricFurnace;
 
-
+    @GameRegistry.ObjectHolder(MBFurnaceBlockWall.INTERNAL_NAME)
+    public static MBFurnaceBlockWall mbFurnaceBlockWall;
+    @GameRegistry.ObjectHolder(MBFurnaceBlockPort.INTERNAL_NAME)
+    public static MBFurnaceBlockPort mbFurnaceBlockPort;
+    @GameRegistry.ObjectHolder(MBFurnaceBlockPort.INTERNAL_NAME2)
+    public static MBFurnaceBlockPort mbFurnaceBlockPort2;
+    @GameRegistry.ObjectHolder(MBFurnaceBlockPort.INTERNAL_NAME3)
+    public static MBFurnaceBlockPort mbFurnaceBlockPort3;
+    @GameRegistry.ObjectHolder(MBFurnaceBlockPort.INTERNAL_NAME4)
+    public static MBFurnaceBlockPort mbFurnaceBlockPort4;
 
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
@@ -82,10 +84,6 @@ public class BlockReg {
         //brocken blocks
         spbb.initModel();
         spcbb.initModel();
-        /*MB_FURNACE_BLOCK_WALL.initBlock();
-        MB_FURNACE_BLOCK_PowerPORT.initBlock();
-        MB_FURNACE_BLOCK_InputPORT.initBlock();
-        MB_FURNACE_BLOCK_OutputPORT.initBlock();
-        MB_FURNACE_BLOCK_FluidPORT.initBlock();*/
+
     }
 }

@@ -1,7 +1,10 @@
 {
   "variants": {
-    "faces=none": { "model": "theimmersivetech:mbfurnaceWall_single" },
-    "faces=all": { "model": "theimmersivetech:mbfurnaceWall_single" },
+    "faces=none": { 
+        "custom": { "flip-v": true },
+        "model": "theimmersivetech:electric_furnace.obj"
+         },
+    "faces=all": { "model": "theimmersivetech:mbfurnacewall_single" },
     "faces=face_d": { "model": "theimmersivetech:mbfurnaceWall_face" },
     "faces=face_u": { "model": "theimmersivetech:mbfurnaceWall_face" },
     "faces=face_e": { "model": "theimmersivetech:mbfurnacewall_face" },

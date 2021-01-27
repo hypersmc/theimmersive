@@ -1,6 +1,9 @@
 package JumpWatch.TheImmersiveTech.utils;
 
 import JumpWatch.TheImmersiveTech.Ids;
+import JumpWatch.TheImmersiveTech.Multiblock.Container.ContainerElectricFurnaceMB;
+import JumpWatch.TheImmersiveTech.Multiblock.Gui.GuiElectricFurnaceMB;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceTileEntity;
 import JumpWatch.TheImmersiveTech.Tile.TileEntitiyEletricFurnace;
 import JumpWatch.TheImmersiveTech.Tile.TileEntityElectricCrusher;
 import JumpWatch.TheImmersiveTech.blocks.Containers.ContainerElectricCrusher;
@@ -19,6 +22,8 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerElectricFurnace(player.inventory, (TileEntitiyEletricFurnace) world.getTileEntity(new BlockPos(x, y, z)));
         if (ID == Ids.GUI_ELECTRIC_CRUSHER)
             return new ContainerElectricCrusher(player.inventory, (TileEntityElectricCrusher) world.getTileEntity(new BlockPos(x, y, z)));
+        if (ID == Ids.GUI_MB_ELECTRIC_FURNACE)
+            return new ContainerElectricFurnaceMB(player.inventory, (MBFurnaceTileEntity) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 
@@ -28,6 +33,8 @@ public class GuiHandler implements IGuiHandler {
             return new GuiElectricFurnace(player.inventory, (TileEntitiyEletricFurnace) world.getTileEntity(new BlockPos(x, y, z)));
         if (ID == Ids.GUI_ELECTRIC_CRUSHER)
             return new GuiElectricCrusher(player.inventory, (TileEntityElectricCrusher) world.getTileEntity(new BlockPos(x, y, z)));
+        if (ID == Ids.GUI_MB_ELECTRIC_FURNACE)
+            return new GuiElectricFurnaceMB(player.inventory, (MBFurnaceTileEntity) world.getTileEntity(new BlockPos(x, y, z)));
         return null;
     }
 }

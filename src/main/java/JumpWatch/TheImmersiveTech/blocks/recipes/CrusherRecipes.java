@@ -1,19 +1,25 @@
 package JumpWatch.TheImmersiveTech.blocks.recipes;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CrusherRecipes {
+    private static HashMap<ItemStack, ItemStack> blockrecipes = new HashMap<>();
     private static final List<CrusherRecipe> recipes = new ArrayList<>();
 
 
     public static void CrusherRecipes(){
         recipes.add(new CrusherRecipe(new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT), 0.0F));
         recipes.add(new CrusherRecipe(new ItemStack(Blocks.GOLD_ORE), new ItemStack(Items.GOLD_INGOT), 0.0f));
+        blockrecipes.put(new ItemStack(Blocks.GOLD_ORE), new ItemStack(Items.GOLD_INGOT));
     }
     public static CrusherRecipe findRecipe(ItemStack input) {
         if (input.isEmpty()) return null;
@@ -24,6 +30,10 @@ public class CrusherRecipes {
             }
         }
         return null;
+    }
+
+    public static ImmutableMap<ItemStack, ItemStack> getBlockCrusherRecipes(){
+        return ImmutableMap.copyOf(blockrecipes);
     }
 
     /**

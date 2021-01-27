@@ -3,6 +3,8 @@ package JumpWatch.TheImmersiveTech.Multiblock;
 import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceFluidIOPortTileEntitiy;
 import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceIOPortTileEntity;
 import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnacePowerTileEntity;
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceTileEntity;
+import JumpWatch.TheImmersiveTech.TheImmersiveTech;
 import cofh.redstoneflux.api.IEnergyReceiver;
 import cofh.redstoneflux.impl.EnergyStorage;
 import it.zerono.mods.zerocore.api.multiblock.IMultiblockPart;
@@ -10,12 +12,19 @@ import it.zerono.mods.zerocore.api.multiblock.MultiblockControllerBase;
 import it.zerono.mods.zerocore.api.multiblock.rectangular.RectangularMultiblockControllerBase;
 import it.zerono.mods.zerocore.api.multiblock.validation.IMultiblockValidator;
 import it.zerono.mods.zerocore.lib.block.ModTileEntity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class MBFurnaceController extends RectangularMultiblockControllerBase implements IEnergyReceiver {
     static int M_size = 3;
+    public static boolean _active = false;
+
+    /**
+     *
+     * @param world Describe the world.
+     */
 
     public MBFurnaceController(World world) {
         super(world);
@@ -26,6 +35,7 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
         this._rfStorage = null;
         this._active = false;
     }
+
     public boolean isActive() {
 
         return this._active;
@@ -34,7 +44,9 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
     /////FLUID////
     @Override
     public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
-        int r = this.getRFStorage().receiveEnergy(maxReceive, simulate);
+        int amount = this.energy += maxReceive;
+
+        int r = this.getRFStorage().receiveEnergy(maxReceive, simulate) & (maxReceive += MBFurnaceTileEntity.energy );
         return r;
     }
 
@@ -65,6 +77,7 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
 
     }
 
+
     @Override
     protected void onBlockRemoved(IMultiblockPart oldPart) {
         if (oldPart instanceof MBFurnaceIOPortTileEntity) {
@@ -87,6 +100,7 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
 
     @Override
     protected void onMachineAssembled() {
+        _active = true;
         this.lookupPorts();
     }
 
@@ -102,6 +116,7 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
 
     @Override
     protected void onMachineDisassembled() {
+        _active = false;
 
     }
 
@@ -174,13 +189,11 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
 
     @Override
     protected boolean updateServer() {
-        this._active = this.tyrToConsumeEnergy(RF_PER_OPERATION);
         return false;
     }
 
     @Override
     protected void updateClient() {
-
     }
 
     @Override
@@ -233,12 +246,12 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
             }
         }
     }
-    protected EnergyStorage getRFStorage(){
+    public EnergyStorage getRFStorage(){
         if (null == this._rfStorage) this._rfStorage = new EnergyStorage(RF_CAPACITY, RF_PER_OPERATION * 2, RF_PER_OPERATION);
         return this._rfStorage;
     }
 
-    protected boolean tyrToConsumeEnergy(int am) {
+    public boolean tyrToConsumeEnergy(int am) {
         if ((null == this._rfStorage) || (am != this._rfStorage.extractEnergy(am, true))) return false;
         this._rfStorage.extractEnergy(am, false);
         return true;
@@ -248,12 +261,17 @@ public class MBFurnaceController extends RectangularMultiblockControllerBase imp
     private MBFurnaceIOPortTileEntity _outputPort;
     private MBFurnacePowerTileEntity _powerPort;
     private MBFurnaceFluidIOPortTileEntitiy _fluidPort;
-    private boolean _active;
+
 
     public static EnergyStorage _rfStorage;
 
-    private static final int RF_CAPACITY = 1000000;
+    public static final int RF_CAPACITY = 1000000;
     private static final int RF_PER_OPERATION = 100;
+    public int energy = 0;
+    public int getEnergyStored() {
+        return this.energy;
+    }
+
 
 
 }

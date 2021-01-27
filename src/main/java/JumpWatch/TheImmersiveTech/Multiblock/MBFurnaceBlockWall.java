@@ -1,12 +1,12 @@
 package JumpWatch.TheImmersiveTech.Multiblock;
 
+import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnacePowerTileEntity;
 import JumpWatch.TheImmersiveTech.Multiblock.Tile.MBFurnaceTileEntity;
 import JumpWatch.TheImmersiveTech.TheImmersiveTech;
 import com.google.common.collect.Lists;
 import it.zerono.mods.zerocore.api.multiblock.IMultiblockPart;
 import it.zerono.mods.zerocore.lib.BlockFacings;
 import it.zerono.mods.zerocore.lib.PropertyBlockFacings;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -24,21 +24,30 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
+    public final static String INTERNAL_NAME = "mbfurnacewall";
     public static final ResourceLocation MBF = new ResourceLocation(TheImmersiveTech.MODID, "mb_furnace");
 
     public MBFurnaceBlockWall(String name) {
         super(name, MBFurnaceBlockType.Wall);
-        this.setHardness(2);
-        this.setResistance(5);
-        this.setCreativeTab(TheImmersiveTech.TITBlocks);
-
         setUnlocalizedName("mbfurnacewall");
+    }
+
+    @Override
+    public boolean isBlockNormalCube(IBlockState blockState) {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState blockState) {
+        return false;
     }
 
     @Override
@@ -59,16 +68,22 @@ public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
             if ((null != controller) && controller.isAssembled()) {
                 worldIn.markBlockRangeForRenderUpdate(pos, pos);
                 int energy = controller.getEnergyStored(EnumFacing.UP);
-                playerIn.sendMessage(new TextComponentString(String.format("Energy stored = %d RF", energy)));
+                playerIn.openGui(TheImmersiveTech.MODID, 6, worldIn, pos.getX(), pos.getY(), pos.getZ());
+
+                //playerIn.openGui(TheImmersiveTech.MODID, 6, worldIn, pos.getX(), pos.getY(), pos.getZ());
                 return true;
             }
+            if (part.getPartPosition().getType().equals(MBFurnaceBlockType.Wall)){
+                playerIn.sendMessage(new TextComponentString("test"));
+            }
+
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return 1;
+        return 0;
     }
 
     @Override
@@ -86,6 +101,7 @@ public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
                 MBFurnaceController controller = (MBFurnaceController)wallTile.getMultiblockController();
                 boolean active = controller.isAssembled() && controller.isActive();
                 if (active) state = state.withProperty(FACES, PropertyBlockFacings.Opposite_EW);
+                
             }
         }
         return state;
@@ -93,11 +109,11 @@ public class MBFurnaceBlockWall extends MBFurnaceBlockBase{
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACES});
+        return new BlockStateContainer(this, FACES);
     }
     @Override
     public void initBlock(){
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(TheImmersiveTech.MODID + ":mbfurnacewall", "inventory"));
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACES, PropertyBlockFacings.All));
     }
 

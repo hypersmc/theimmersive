@@ -36,7 +36,7 @@ public class TileEntitiyEletricFurnace extends TileEntity implements ITickable, 
     private String customName;
     public static int cookTime;
     public int dontbother;
-    private ItemStack smelting = ItemStack.EMPTY;
+
     @Override
     public void update() {
         tick++;
